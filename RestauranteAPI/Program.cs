@@ -12,7 +12,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 var stringConnection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<RestauranteContext>(options => options.UseMySql(stringConnection, ServerVersion.AutoDetect(stringConnection)));
+builder.Services.AddDbContext<RestauranteContext>(options => options.UseMySql(stringConnection,
+    ServerVersion.AutoDetect(stringConnection),
+    mySql => mySql.SchemaBehavior(Pomelo.EntityFrameworkCore.MySql.Infrastructure.MySqlSchemaBehavior.Ignore)));
 
 var app = builder.Build();
 

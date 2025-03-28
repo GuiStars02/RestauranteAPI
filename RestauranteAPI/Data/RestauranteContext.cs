@@ -19,6 +19,5 @@ namespace RestauranteAPI.Data
             modelBuilder.ApplyConfiguration(new PratosConfiguration());
             modelBuilder.ApplyConfiguration(new CategoriaPratoConfiguration());
         }
-
     }
 }
