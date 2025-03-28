@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Data\EntitiesConfiguration\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>
