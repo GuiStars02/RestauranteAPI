@@ -1,38 +1,49 @@
-﻿using RestauranteAPI.Repositories.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using RestauranteAPI.Data;
+using RestauranteAPI.Repositories.Interface;
+using System.Linq.Expressions;
 
 namespace RestauranteAPI.Repositories
 {
     public class RepositoryTotalFlexBase<TEntity> : IRepositoryTotalFlexBase<TEntity>
             where TEntity : class
     {
-        public TEntity Create(TEntity entity)
+        private readonly RestauranteContext _context;
+
+        public RepositoryTotalFlexBase(RestauranteContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
+        }
+
+        public IQueryable<TEntity> GetByCondition(Expression<Func<TEntity, bool>> expression)
+        {
+            return _context.Set<TEntity>().Where(expression).AsNoTracking();
+        }
+
+        public async Task<TEntity?> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> expression)
+        {
+            return await _context.Set<TEntity>().Where(expression).FirstOrDefaultAsync();
+        }
+
+        public void Create(TEntity entity)
+        {
+            _context.Set<TEntity>().Add(entity);
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            _context.Remove(entity);
+
         }
 
-        public IEnumerable<TEntity>? GetAll()
+        public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<TEntity> GetByCondition(System.Linq.Expressions.Expression<Func<TEntity, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity GetById(System.Linq.Expressions.Expression<Func<TEntity, bool>> expression)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TEntity Update(TEntity entity)
-        {
-            throw new NotImplementedException();
+            _context.Set<TEntity>().Update(entity);
         }
     }
 }
