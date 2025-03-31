@@ -4,9 +4,9 @@ using RestauranteAPI.Data.Models;
 
 namespace RestauranteAPI.Data.EntitiesConfiguration
 {
-    public class PratosConfiguration : IEntityTypeConfiguration<Pratos>
+    public class PratoConfiguration : IEntityTypeConfiguration<Prato>
     {
-        public void Configure(EntityTypeBuilder<Pratos> builder)
+        public void Configure(EntityTypeBuilder<Prato> builder)
         {
             builder.HasKey(x => x.IdPrato);
             builder.HasOne(x => x.CategoriaPrato)

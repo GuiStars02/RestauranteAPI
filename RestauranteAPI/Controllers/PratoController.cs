@@ -5,11 +5,11 @@ namespace RestauranteAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PratosController : ControllerBase
+    public class PratoController : ControllerBase
     {
         private readonly RestauranteContext _context;
 
-        public PratosController(RestauranteContext context)
+        public PratoController(RestauranteContext context)
         {
             _context = context;
         }
@@ -19,7 +19,7 @@ namespace RestauranteAPI.Controllers
         {
             try
             {
-                return Ok(_context.Pratos);
+                return Ok(_context.Prato);
             }
             catch(Exception e)
             {

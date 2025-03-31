@@ -7,6 +7,6 @@ namespace RestauranteAPI.Data.Models
     {
         public int IdCategoriaPrato { get; set; }
         public string DescricaoCategoria { get; set; }
-        public ICollection<Pratos> Pratos { get; set; } = new List<Pratos>();
+        public ICollection<Prato> Pratos { get; set; } = new List<Prato>();
     }
 }

@@ -2,8 +2,8 @@
 
 namespace RestauranteAPI.Data.Models
 {
-    [Table("Pratos")]
-    public class Pratos
+    [Table("Prato")]
+    public class Prato
     {
         public int IdPrato { get; set; }
         public string NomePrato { get; set; }
