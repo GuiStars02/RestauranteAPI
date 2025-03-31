@@ -9,12 +9,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
 
 var stringConnection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<RestauranteContext>(options => options.UseMySql(stringConnection,
-    ServerVersion.AutoDetect(stringConnection),
-    mySql => mySql.SchemaBehavior(Pomelo.EntityFrameworkCore.MySql.Infrastructure.MySqlSchemaBehavior.Ignore)));
+    ServerVersion.AutoDetect(stringConnection)));
 
 var app = builder.Build();
 
