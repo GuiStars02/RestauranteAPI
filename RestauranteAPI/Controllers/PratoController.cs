@@ -28,15 +28,15 @@ namespace RestauranteAPI.Controllers
             }
         }
 
-        [HttpGet("{id}", Name = "ObterPrato")]
-        public async Task<IActionResult> GetPratoById(int id)
+        [HttpGet("{idPrato:int}", Name = "ObterPrato")]
+        public async Task<IActionResult> GetPratoById(int idPrato)
         {
             try
             {
-                var prato = await _service.GetPratoById(id);
+                var prato = await _service.GetPratoById(idPrato);
                 if(prato is null)
                 {
-                    return NotFound($"Prato com o id: {id} não encontrado");
+                    return NotFound($"Prato com o id: {idPrato} não encontrado");
                 }
 
                 return Ok(prato);
@@ -60,6 +60,47 @@ namespace RestauranteAPI.Controllers
                 var pratoCreated = await _service.CreatePrato(prato);
                 return new CreatedAtRouteResult("ObterPrato", new { id = prato.IdPrato}, prato);
 
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{idPrato:int}")]
+        public async Task<IActionResult> UpdatePrato(int idPrato, Prato prato)
+        {
+            try
+            {
+                if (prato.IdPrato != idPrato)
+                {
+                    return BadRequest("Dados inválidos");
+                }
+
+                await _service.UpdatePrato(prato);
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{idPrato:int}")]
+        public async Task<IActionResult> DeletePrato(int idPrato)
+        {
+            try
+            {
+                var result = await _service.DeletePrato(idPrato);
+                if(result)
+                {
+                    return Ok("Produto excluído com sucesso");
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, $"Erro ao excluir prato de id: {idPrato}");
+                }
             }
             catch (Exception e)
             {

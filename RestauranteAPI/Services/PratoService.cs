@@ -34,16 +34,24 @@ namespace RestauranteAPI.Services
             return prato;
         }
 
-        public async Task DeletePrato(Prato prato)
-        {
-            _repository.Delete(prato);
-            await _repository.SaveChangesAsync();
-        }
-
         public async Task UpdatePrato(Prato prato)
         {
             _repository.Update(prato);
             await _repository.SaveChangesAsync();
+        }
+
+        public async Task<bool> DeletePrato(int id)
+        {
+            var prato = await _repository.GetFirstOrDefaultAsync(x => x.IdPrato == id);
+
+            if(prato is null)
+            {
+                return false;
+            }
+
+            _repository.Delete(prato);
+            await _repository.SaveChangesAsync();
+            return true;
         }
     }
 }
