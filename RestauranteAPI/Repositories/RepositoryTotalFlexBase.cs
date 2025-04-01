@@ -20,9 +20,9 @@ namespace RestauranteAPI.Repositories
             return await _context.Set<TEntity>().AsNoTracking().ToListAsync();
         }
 
-        public IQueryable<TEntity> GetByCondition(Expression<Func<TEntity, bool>> expression)
+        public async Task<IEnumerable<TEntity>> GetByCondition(Expression<Func<TEntity, bool>> expression)
         {
-            return _context.Set<TEntity>().Where(expression).AsNoTracking();
+            return await _context.Set<TEntity>().Where(expression).AsNoTracking().ToListAsync();
         }
 
         public async Task<TEntity?> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> expression)
@@ -37,13 +37,18 @@ namespace RestauranteAPI.Repositories
 
         public void Delete(TEntity entity)
         {
-            _context.Remove(entity);
+            _context.Set<TEntity>().Remove(entity);
 
         }
 
         public void Update(TEntity entity)
         {
             _context.Set<TEntity>().Update(entity);
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }
