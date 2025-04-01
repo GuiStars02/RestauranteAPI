@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace RestauranteAPI.Data.Models
 {
@@ -10,6 +11,7 @@ namespace RestauranteAPI.Data.Models
         public string? DescricaoPrato { get; set; }
         public int IdCategoriaPrato { get; set; }
         public decimal ValorPrato { get; set; }
+        [JsonIgnore]
         public virtual CategoriaPrato? CategoriaPrato { get; set; }
     }
 }
