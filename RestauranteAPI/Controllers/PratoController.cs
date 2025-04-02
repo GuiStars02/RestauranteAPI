@@ -16,7 +16,7 @@ namespace RestauranteAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetPratos()
+        public async Task<IActionResult> GetPrato()
         {
             try
             {
@@ -28,7 +28,7 @@ namespace RestauranteAPI.Controllers
             }
         }
 
-        [HttpGet("{idPrato:int}", Name = "ObterPrato")]
+        [HttpGet("{idPrato:int}", Name = "ObterPratoPorId")]
         public async Task<IActionResult> GetPratoById(int idPrato)
         {
             try
