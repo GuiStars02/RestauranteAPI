@@ -58,7 +58,7 @@ namespace RestauranteAPI.Controllers
                 }
 
                 var pratoCreated = await _service.CreatePrato(prato);
-                return new CreatedAtRouteResult("ObterPrato", new { id = prato.IdPrato}, prato);
+                return new CreatedAtRouteResult("ObterPratoPorId", new { idPrato = prato.IdPrato}, prato);
 
             }
             catch (Exception e)

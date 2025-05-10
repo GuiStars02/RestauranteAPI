@@ -21,6 +21,16 @@ builder.Services.AddDbContext<RestauranteContext>(options => options.UseMySql(st
 builder.Services.AddScoped(typeof(IRepositoryTotalFlexBase<>), typeof(RepositoryTotalFlexBase<>));
 builder.Services.AddScoped<IPratoService, PratoService>();
 builder.Services.AddScoped<ICategoriaPratoService, CategoriaPratoService>();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("myPolicy", policy =>
+    {
+        policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        
+    });
+});
 
 var app = builder.Build();
 
@@ -33,6 +43,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("myPolicy");
 app.UseAuthorization();
 
 app.MapControllers();
