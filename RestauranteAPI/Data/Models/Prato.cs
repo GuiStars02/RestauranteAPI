@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace RestauranteAPI.Data.Models
@@ -13,5 +14,6 @@ namespace RestauranteAPI.Data.Models
         public decimal ValorPrato { get; set; }
         [JsonIgnore]
         public virtual CategoriaPrato? CategoriaPrato { get; set; }
+        public virtual ICollection<Balanco> Balanco { get; set; } = new List<Balanco>();
     }
 }

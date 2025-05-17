@@ -12,12 +12,14 @@ namespace RestauranteAPI.Data
 
         public DbSet<Prato> Prato { get; set; }
         public DbSet<CategoriaPrato> CategoriaPrato { get; set; }
+        public DbSet<Balanco> Balanco { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new PratoConfiguration());
             modelBuilder.ApplyConfiguration(new CategoriaPratoConfiguration());
+            modelBuilder.ApplyConfiguration(new BalancoConfiguration());
         }
     }
 }
