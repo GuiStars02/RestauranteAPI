@@ -21,6 +21,7 @@ builder.Services.AddDbContext<RestauranteContext>(options => options.UseMySql(st
 builder.Services.AddScoped(typeof(IRepositoryTotalFlexBase<>), typeof(RepositoryTotalFlexBase<>));
 builder.Services.AddScoped<IPratoService, PratoService>();
 builder.Services.AddScoped<ICategoriaPratoService, CategoriaPratoService>();
+builder.Services.AddScoped<IBalancoService, BalancoService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("myPolicy", policy =>
